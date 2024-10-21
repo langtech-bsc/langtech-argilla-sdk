@@ -13,7 +13,7 @@ class SDKConnection:
         return cls._instance
 
     def _initialize_connection(self, api_url=None, api_key=None, **kwargs):
-        # Validate required environment variables
+
         api_url = api_url or os.getenv("ARGILLA_API_URL")
         api_key = api_key or os.getenv("ARGILLA_API_KEY")
 
@@ -22,7 +22,6 @@ class SDKConnection:
         if not api_key:
             raise ValueError("ARGILLA_API_KEY is not set in the environment variables")
 
-        # Code to initialize connection with the SDK
         import argilla as rg
         self._instance = rg.Argilla(
             api_url=api_url,

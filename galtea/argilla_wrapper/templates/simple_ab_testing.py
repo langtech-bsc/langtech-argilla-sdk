@@ -2,13 +2,13 @@ from typing import List, Optional
 import argilla as rg 
 from .template import Template
 class SimpleABTestingTemplate(Template):
-    def __init__(self, name, fields: List[str], extra_fields: Optional[List[rg.Field]] = None, guidelines: Optional[str] = None):
+    def __init__(self, name, fields: List[str], extra_fields: Optional[List[rg.Field]] = None, guidelines: Optional[str] = None, distribution: Optional[int] = 1):
         self.name = name        
         self.ab_fields = fields
 
         self.guidelines = guidelines
         self.extra_fields = extra_fields
-       
+        # self.distribution = distribution
 
     def build_settings(self):
 
@@ -23,6 +23,7 @@ class SimpleABTestingTemplate(Template):
         settings = rg.Settings(
             allow_extra_metadata=True,
             guidelines=self.guidelines,
+            # distribution=self.distribution,
             fields=rg_fields,
             questions=[
                 rg.LabelQuestion(

@@ -2,7 +2,7 @@
 from galtea.argilla_wrapper.connection.sdk_connection import SDKConnection
 from galtea.argilla_wrapper.utils import load_json, sanitize_string
 import argilla as rg
-
+import time
 class DatasetManager:
     def __init__(self):
         self.connection = SDKConnection()
@@ -16,6 +16,12 @@ class DatasetManager:
         if existent_dataset is not None:
             print(f"Dataset {dataset_name} already exists in workspace {workspace.name}")
             self.dataset = existent_dataset
+            dataset_progress_data = self.dataset.progress()
+            print(dataset_progress_data)
+            if dataset_progress_data["completed"] == dataset_progress_data["total"]:
+                print(f"Dataset {dataset_name} is already completed.")
+                print(f"Exporting dataset to {dataset_name}_{time.strftime('%Y-%m-%d_%H-%M-%S')}.json")
+                self.dataset.records.to_json(f"{dataset_name}_{time.strftime('%Y-%m-%d_%H-%M-%S')}.json")
             return
 
         dataset = rg.Dataset(
@@ -48,3 +54,5 @@ class DatasetManager:
 
         self.dataset.records.log(records=records)
         
+    def export_records(self, output_path):
+        self.dataset.records.to_json(output_path)
