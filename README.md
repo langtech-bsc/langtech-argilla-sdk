@@ -90,7 +90,7 @@ Elevate your text evaluation process with Galtea's intuitive annotation task cre
            name="text-eval",
            template_type="ab_testing",
            dataset_path="./ab_testing_100_red_team.json",
-           min_submitted=2,
+           min_submitted=1,
            guidelines="This is a test guidelines"
        )
 
