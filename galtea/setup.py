@@ -8,7 +8,8 @@ setup(
     install_requires=[
         # List your dependencies here
         "argilla==2.3.0",
-        "python-dotenv==1.0.1"
+        "python-dotenv==1.0.1",
+        "email-validator==2.1.2"
     ],
     description="...",
     long_description=open("README.md").read() if os.path.exists("README.md") else "",

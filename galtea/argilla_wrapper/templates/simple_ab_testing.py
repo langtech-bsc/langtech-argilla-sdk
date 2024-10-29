@@ -1,30 +1,26 @@
 from typing import List, Optional
-import argilla as rg 
+import argilla as rg
+
+from galtea.argilla_wrapper.models.ab_testing_fields import ABTestingFields 
 from .template import Template
 class SimpleABTestingTemplate(Template):
-    def __init__(self, name, fields: List[str], extra_fields: Optional[List[rg.Field]] = None, guidelines: Optional[str] = None, distribution: Optional[int] = 1):
+    def __init__(self, name, guidelines: Optional[str] = None, distribution: Optional[int] = 1):
         self.name = name        
-        self.ab_fields = fields
-
         self.guidelines = guidelines
-        self.extra_fields = extra_fields
+        self.fields_model = ABTestingFields  # Add this line
         # self.distribution = distribution
 
     def build_settings(self):
-
-        rg_fields = [
-            rg.TextField(name=field, title=field, required=True)
-            for field in self.ab_fields
-        ]
-
-        if self.extra_fields is not None:
-            rg_fields.extend(self.extra_fields)
 
         settings = rg.Settings(
             allow_extra_metadata=True,
             guidelines=self.guidelines,
             # distribution=self.distribution,
-            fields=rg_fields,
+            fields=[
+                rg.TextField(name="prompt", title="Prompt", required=True),
+                rg.TextField(name="answer_a", title="Answer A", required=True),
+                rg.TextField(name="answer_b", title="Answer B", required=True),
+            ],
             questions=[
                 rg.LabelQuestion(
                     name="label",

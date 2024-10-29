@@ -7,7 +7,7 @@ def sanitize_string(string: str) -> str:
     """
     Given the string, returns a sanitized version of it.
     """
-    return re.sub(r"[\"<>:/\|\\?\*\[\]]+", "__", string)
+    return re.sub(r"[\"<>:/.+\|\\?\*\[\]]+", "__", string)
 
 def generate_random_string(length=8):
     """
