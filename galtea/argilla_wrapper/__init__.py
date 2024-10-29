@@ -7,7 +7,7 @@ from galtea.argilla_wrapper.workspaces.workspace_manager import WorkspaceManager
 
 
 
-def create_annotation_task(name, template_type, dataset_path):
+def create_annotation_task(name, template_type, dataset_path, min_submitted: Optional[int] = None, guidelines: Optional[str] = None):
     workspace_manager = WorkspaceManager()
     workspace = workspace_manager.create_workspace(name)
 
@@ -15,7 +15,7 @@ def create_annotation_task(name, template_type, dataset_path):
     user_manager.create_users(workspace)
 
     template_factory = ConcreteTemplateFactory()
-    template = template_factory.get_template(name, template_type)
+    template = template_factory.get_template(name, template_type, min_submitted, guidelines)
     settings = template.build_settings()
     
     dataset_manager = DatasetManager(template)

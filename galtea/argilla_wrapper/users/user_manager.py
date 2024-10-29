@@ -32,6 +32,7 @@ class UserManager:
         if _user is not None:
             print(f"User {_user.username} already exists")
             user_already_exists = True
+            return [_user, user_credentials, user_already_exists]
         
         user_to_create = rg.User(
             username=user_credentials['username'],

@@ -5,7 +5,6 @@ import ssl
 from dotenv import load_dotenv
 import os,random, string
 
-from galtea.argilla_wrapper.models import user
 from galtea.argilla_wrapper.utils import sanitize_string
 from .html_email_template import HTML_EMAIL_TEMPLATE
 
@@ -54,7 +53,7 @@ class UserEmailNotifier:
             "last_name": last_name,
             "username": username,
             "password": password,
-            "workspace": workspace,
+            "workspace": workspace.name,
             "argilla_url": argilla_url
         })
 

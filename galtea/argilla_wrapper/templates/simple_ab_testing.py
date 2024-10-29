@@ -3,19 +3,20 @@ import argilla as rg
 
 from galtea.argilla_wrapper.models.ab_testing_fields import ABTestingFields 
 from .template import Template
+
 class SimpleABTestingTemplate(Template):
-    def __init__(self, name, guidelines: Optional[str] = None, distribution: Optional[int] = 1):
+    def __init__(self, name, min_submitted: Optional[int] = 1, guidelines: Optional[str] = None):
         self.name = name        
         self.guidelines = guidelines
-        self.fields_model = ABTestingFields  # Add this line
-        # self.distribution = distribution
+        self.fields_model = ABTestingFields
+        self.min_submitted = min_submitted
 
     def build_settings(self):
 
         settings = rg.Settings(
             allow_extra_metadata=True,
             guidelines=self.guidelines,
-            # distribution=self.distribution,
+            distribution=rg.TaskDistribution(min_submitted=self.min_submitted),
             fields=[
                 rg.TextField(name="prompt", title="Prompt", required=True),
                 rg.TextField(name="answer_a", title="Answer A", required=True),
