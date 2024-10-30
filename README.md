@@ -6,8 +6,8 @@ Streamline your text evaluation process with Galtea's powerful annotation task c
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/langtech-bsc/galtea-sdk.git
+   cd galtea-sdk
    ```
 
 2. Create and activate a virtual environment:
@@ -104,8 +104,8 @@ Elevate your text evaluation process with Galtea's intuitive annotation task cre
    python main.py
    ```
 
-This will generate a powerful "text-eval" annotation task using the AB testing template. The task will leverage your specified dataset and include the fields "prompt", "answer_a", and "answer_b", with "model_a" as a metadata field.
+This will generate a powerful "text-eval" annotation task using the AB testing template.
 
-Customize the parameters to align with your specific evaluation needs, such as adjusting the `name`, `dataset_path`, `fields`, and `metadata_fields`.
+Customize the parameters to align with your specific evaluation needs, such as adjusting the `name`, `dataset_path`, `template_type`, `min_submitted` and `guidelines`.
 
 With Galtea, you're now ready to supercharge your text evaluation process and gain valuable insights from your data!
