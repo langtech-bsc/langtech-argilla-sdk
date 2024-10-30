@@ -9,7 +9,7 @@ def sanitize_string(string: str) -> str:
     """
     return re.sub(r"[\"<>:/.+\|\\?\*\[\]]+", "__", string)
 
-def generate_random_string(length=8):
+def generate_random_string(length: int = 8) -> str:
     """
     Generates a random string of the given length.
     """
@@ -17,7 +17,7 @@ def generate_random_string(length=8):
     return ''.join(random.choice(characters) for _ in range(length))
 
 
-def load_json(file_path, encoding=None):
+def load_json(file_path: str, encoding: str = None) -> dict:
     """
     Loads a JSON file and returns the contents as a dictionary.
     """

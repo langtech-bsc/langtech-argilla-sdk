@@ -1,16 +1,16 @@
+from galtea.argilla_wrapper.datasets.dataset_manager import DatasetManager
 from galtea.argilla_wrapper.utils import sanitize_string
-from ..connection.sdk_connection import SDKConnection
 import argilla as rg
 
 class WorkspaceManager:
-    def __init__(self):
+    def __init__(self, client: rg.Argilla):
 
-        self.connection = SDKConnection()
+        self._client = client
 
 
     def workspace_exists(self, workspace_name: str) -> bool:
 
-        workspace = self.connection._instance.workspaces(name=workspace_name)
+        workspace = self._client.workspaces(workspace_name)
 
         if workspace:
             return True
@@ -23,19 +23,39 @@ class WorkspaceManager:
     :return: workspace object
     
     """
-    def create_workspace(self, name):
+    def create_workspace(self, name: str):
 
-        name = sanitize_string(name)
-        
-        if self.workspace_exists(name):
+        try:
+            name = sanitize_string(name)
+            workspace = rg.Workspace(
+                name=name,
+                client=self._client
+            )
+            workspace = workspace.create()
+
+            print(f"Created workspace {name}")
+
+            return workspace
+
+
+        except rg._exceptions._api.ConflictError:
             print(f"Workspace {name} already exists")
-            return self.connection._instance.workspaces(name=name)
+            return self._client.workspaces(name)
+        except Exception as e:
+            print(f"Error creating workspace {name}: {e}")
+    
+    @staticmethod
+    def get_workspace_manager(client: rg.Argilla, workspace_name: str):
         
-        workspace = rg.Workspace(
-            name=name,
-            client=self.connection._instance
-        )
+        try:
+            workspace = client.workspaces(workspace_name)
+            return WorkspaceManager(client, workspace)
+    
+        except Exception as e:
+            raise ValueError(f"Workspace {workspace_name} not found") from e
 
-        workspace.create()
-
-        return workspace
+    def get_dataset_manager(self, dataset_name: str):
+        return DatasetManager.get_dataset_manager(self._client, dataset_name, self._workspace.name)
+    
+    def create_dataset(self, dataset_name: str, settings: dict):
+        return DatasetManager.create_dataset(self._client, dataset_name, self._workspace.name, settings)

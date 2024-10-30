@@ -4,10 +4,10 @@ import os
 setup(
     name="galtea",
     version="0.1.0",
-    packages=find_packages(),
+    packages=find_packages(include=["galtea", "galtea.*"]),
     install_requires=[
         # List your dependencies here
-        "argilla==2.3.0",
+        "argilla==2.4.0",
         "python-dotenv==1.0.1",
         "email-validator==2.1.2"
     ],

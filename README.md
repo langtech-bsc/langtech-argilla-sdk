@@ -83,19 +83,29 @@ Elevate your text evaluation process with Galtea's intuitive annotation task cre
    In your `main.py` file, use the following code to create a simple ab testing annotation task:
 
    ```python
-   import galtea
+      from dotenv import load_dotenv
+      load_dotenv()
 
-   def main():
-       galtea.create_annotation_task(
-           name="text-eval",
-           template_type="ab_testing",
-           dataset_path="./ab_testing_100_red_team.json",
-           min_submitted=1,
-           guidelines="This is a test guidelines"
-       )
+      import galtea
 
-   if __name__ == "__main__":
-       main()
+
+      def main():
+         
+         with galtea.ArgillaAnnotationTask() as pipeline:
+
+            pipeline.create_annotation_task(
+                  name="text-eval",
+                  template_type="ab_testing",
+                  dataset_path="./sample_data/dataset.json",
+                  min_submitted=1,
+                  guidelines="This is a test guidelines",
+                  users_path_file="./sample_data/users.json"
+            )
+
+            # print(pipeline.get_progress())
+         
+      if __name__ == "__main__":
+         main()
    ```
 
 3. Launch your annotation task:
@@ -106,6 +116,6 @@ Elevate your text evaluation process with Galtea's intuitive annotation task cre
 
 This will generate a powerful "text-eval" annotation task using the AB testing template.
 
-Customize the parameters to align with your specific evaluation needs, such as adjusting the `name`, `dataset_path`, `template_type`, `min_submitted` and `guidelines`.
+Customize the parameters to align with your specific evaluation needs, such as adjusting the `name`, `dataset_path`, `template_type`, `min_submitted`  and `guidelines`.
 
 With Galtea, you're now ready to supercharge your text evaluation process and gain valuable insights from your data!

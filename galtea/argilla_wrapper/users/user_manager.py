@@ -1,15 +1,14 @@
 from galtea.argilla_wrapper.models.user import UserInput
 from galtea.argilla_wrapper.users.user_mail_notifier import UserEmailNotifier
 from galtea.argilla_wrapper.utils import generate_random_string, load_json, sanitize_string
-from ..connection.sdk_connection import SDKConnection
 import argilla as rg
 
 class UserManager:
-    def __init__(self):
-        self.connection = SDKConnection()
+    def __init__(self, client: rg.Argilla):
+        self._client = client
         self.user_mail_notifier = UserEmailNotifier()
 
-    def generate_user_credentials(self, username, workspace, user: UserInput):
+    def generate_user_credentials(self, username: str, workspace: rg.Workspace, user: UserInput) -> dict:
         return {
             "first_name": user.first_name,
             "last_name": user.last_name,
@@ -20,14 +19,14 @@ class UserManager:
             "workspace": workspace
         }   
     
-    def parse_username_from_email(self, email):
+    def parse_username_from_email(self, email: str) -> str:
         return sanitize_string(email.split("@")[0])
     
-    def _create_user(self, user_credentials):
+    def _create_user(self, user_credentials: dict) -> list[rg.User, dict, bool]:
         
         user_already_exists = False
 
-        _user = self.connection._instance.users(user_credentials['username'])
+        _user = self._client.users(user_credentials['username'])
 
         if _user is not None:
             print(f"User {_user.username} already exists")
@@ -40,7 +39,7 @@ class UserManager:
             first_name=user_credentials['first_name'],
             last_name=user_credentials['last_name'],
             role=user_credentials['role'],
-            client=self.connection._instance
+            client=self._client
         )
         
         _user = user_to_create.create()
@@ -52,13 +51,13 @@ class UserManager:
 
         print(f"Deleting user: {user.username}")     
 
-        _user = self.connection._instance.users(user.username)
+        _user = self._client.users(user.username)
 
         if _user is not None:
             _user.delete()
 
         
-    def create_users(self, workspace: rg.Workspace, users_path_file = "users.json"):
+    def create_users(self, workspace: rg.Workspace, users_path_file: str = "users.json"):
         users = load_json(users_path_file)
 
         for user in users:
@@ -78,9 +77,9 @@ class UserManager:
                 
             self._add_user_to_workspace(created_user[0].username, workspace)
 
-    def _add_user_to_workspace(self, username, workspace: rg.Workspace):
+    def _add_user_to_workspace(self, username: str, workspace: rg.Workspace):
 
-        user = self.connection._instance.users(username)
+        user = self._client.users(username)
 
         if user is None:
             raise ValueError(f"User {username} does not exist")
