@@ -73,16 +73,17 @@ class DatasetManager:
             raise ValueError(f"Dataset not found")
         return self.dataset.progress()
     
-    @staticmethod
-    def get_dataset_manager(client: rg.Argilla, dataset_name: str, workspace_name: str):
+    @classmethod
+    def get_dataset_manager(cls, client: rg.Argilla, dataset_name: str, workspace_name: str):
         """
         Get the DatasetManager instance for a given dataset. 
         """
         
         try:
             dataset = client.datasets(name=dataset_name, workspace=workspace_name)
-            return DatasetManager(client, dataset)
-
+            return cls(client, dataset)
+        
+        
         except Exception as e:
             raise ValueError(f"Dataset {dataset_name} not found in workspace {workspace_name}") from e
         

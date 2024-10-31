@@ -44,12 +44,12 @@ class WorkspaceManager:
         except Exception as e:
             print(f"Error creating workspace {name}: {e}")
     
-    @staticmethod
-    def get_workspace_manager(client: rg.Argilla, workspace_name: str):
+    @classmethod
+    def get_workspace_manager(cls, client: rg.Argilla, workspace_name: str):
         
         try:
             workspace = client.workspaces(workspace_name)
-            return WorkspaceManager(client, workspace)
+            return cls(client, workspace)
     
         except Exception as e:
             raise ValueError(f"Workspace {workspace_name} not found") from e
