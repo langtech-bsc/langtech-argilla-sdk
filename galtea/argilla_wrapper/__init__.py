@@ -1,5 +1,5 @@
 from typing import Optional
-import os, logging
+import os
 from galtea.argilla_wrapper.connection.sdk_connection import SDKConnection
 from galtea.argilla_wrapper.datasets.dataset_manager import DatasetManager
 from galtea.argilla_wrapper.templates.concrete import ConcreteTemplateFactory
