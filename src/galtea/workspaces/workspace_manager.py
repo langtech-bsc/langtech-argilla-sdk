@@ -1,5 +1,5 @@
-from galtea.argilla_wrapper.datasets.dataset_manager import DatasetManager
-from galtea.argilla_wrapper.utils import sanitize_string
+from galtea.datasets.dataset_manager import DatasetManager
+from galtea.utils import sanitize_string
 import argilla as rg
 
 class WorkspaceManager:

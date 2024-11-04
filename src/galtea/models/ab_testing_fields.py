@@ -1,4 +1,4 @@
-from galtea.argilla_wrapper.models.base_fields import BaseTemplateFields
+from galtea.models.base_fields import BaseTemplateFields
 
 class ABTestingFields(BaseTemplateFields):
     prompt: str

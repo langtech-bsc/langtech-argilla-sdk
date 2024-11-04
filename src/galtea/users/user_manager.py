@@ -1,6 +1,6 @@
-from galtea.argilla_wrapper.models.user import UserInput
-from galtea.argilla_wrapper.users.user_mail_notifier import UserEmailNotifier
-from galtea.argilla_wrapper.utils import generate_random_string, load_json, sanitize_string
+from galtea.models.user import UserInput
+from galtea.users.user_mail_notifier import UserEmailNotifier
+from galtea.utils import generate_random_string, load_json, sanitize_string
 import argilla as rg
 
 class UserManager:

@@ -1,4 +1,4 @@
-from galtea.argilla_wrapper.utils import load_json, sanitize_string
+from galtea.utils import load_json, sanitize_string
 import argilla as rg
 
 class DatasetManager:
