@@ -1,8 +1,8 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from galtea.argilla_wrapper.datasets.dataset_manager import DatasetManager
-from galtea.argilla_wrapper.connection.sdk_connection import SDKConnection
+from galtea.datasets.dataset_manager import DatasetManager
+from galtea.connection.sdk_connection import SDKConnection
 
 
 sdk_connection = SDKConnection()
