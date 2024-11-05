@@ -4,21 +4,23 @@ Streamline your text evaluation process with Galtea's powerful annotation task c
 
 ## Setting Up the Development Environment
 
+#### Prerequisites:
+Before starting, make sure you have [Poetry](https://python-poetry.org/docs/main/) installed. Poetry is a tool for dependency management and packaging in Python. 
+
 1. Clone the repository:
-   ```
+   ```bash
    git clone https://github.com/langtech-bsc/galtea-sdk.git
    cd galtea-sdk
    ```
 
-2. Create and activate a virtual environment:
-   ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+2. To install the project dependencies, run:
+   ```bash
+   poetry install
    ```
 
-3. Install the required dependencies:
-   ```
-   pip install -e .
+3. To active the virtual environmennt created by Poetry run:
+   ```bash
+   poetry shell
    ```
 
 4. Set up your environment variables:
