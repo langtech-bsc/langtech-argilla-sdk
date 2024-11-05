@@ -1,8 +1,8 @@
 from typing import Optional
 import argilla as rg
 
-from galtea.argilla_wrapper.models.ab_testing_fields import ABTestingFields 
-from galtea.argilla_wrapper.templates.template import Template
+from galtea.models.ab_testing_fields import ABTestingFields 
+from galtea.templates.template import Template
 
 class SimpleABTestingTemplate(Template):
     def __init__(self, name, min_submitted: Optional[int] = 1, guidelines: Optional[str] = None):

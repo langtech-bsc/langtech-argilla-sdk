@@ -4,8 +4,8 @@ import smtplib
 import ssl
 import os,random, string
 import argilla as rg
-from galtea.argilla_wrapper.utils import sanitize_string
-from galtea.argilla_wrapper.users.html_email_template import HTML_EMAIL_TEMPLATE
+from galtea.utils import sanitize_string
+from galtea.users.html_email_template import HTML_EMAIL_TEMPLATE
 
 
 class UserEmailNotifier:

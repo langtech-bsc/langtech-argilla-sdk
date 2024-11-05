@@ -1,8 +1,8 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from galtea.argilla_wrapper.workspaces.workspace_manager import WorkspaceManager
-from galtea.argilla_wrapper.connection.sdk_connection import SDKConnection
+from galtea.workspaces.workspace_manager import WorkspaceManager
+from galtea.connection.sdk_connection import SDKConnection
 
 
 sdk_connection = SDKConnection()

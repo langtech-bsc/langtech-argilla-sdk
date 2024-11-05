@@ -1,10 +1,10 @@
 from typing import Optional
 import os
-from galtea.argilla_wrapper.connection.sdk_connection import SDKConnection
-from galtea.argilla_wrapper.datasets.dataset_manager import DatasetManager
-from galtea.argilla_wrapper.templates.concrete import ConcreteTemplateFactory
-from galtea.argilla_wrapper.users.user_manager import UserManager
-from galtea.argilla_wrapper.workspaces.workspace_manager import WorkspaceManager
+from galtea.connection.sdk_connection import SDKConnection
+from galtea.datasets.dataset_manager import DatasetManager
+from galtea.templates.concrete import ConcreteTemplateFactory
+from galtea.users.user_manager import UserManager
+from galtea.workspaces.workspace_manager import WorkspaceManager
 
 
 class ArgillaAnnotationTask:
