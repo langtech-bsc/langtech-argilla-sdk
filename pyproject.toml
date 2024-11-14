@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "galtea"
+name = "galtea-sdk"
 version = "0.1.0"
 description = ""
 authors = ["Andrei Petrea <andreipetrea3@gmail.com>"]
