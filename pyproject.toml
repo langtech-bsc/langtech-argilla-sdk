@@ -2,7 +2,7 @@
 name = "galtea"
 version = "0.1.0"
 description = ""
-authors = ["Andrei Petrea <andreipetrea3@gmail.com>"]
+authors = ["Nicola Massarenti", "Andrei Petrea"]
 readme = "README.md"
 packages = [{include = "galtea", from ="src"}]
 
