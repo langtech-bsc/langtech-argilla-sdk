@@ -1,11 +1,11 @@
 from typing import Optional
 import argilla as rg
 
-from galtea.models.ab_testing_fields import ABTestingFields 
+from galtea.models.template_fields import ABTestingFields 
 from galtea.templates.template import Template
 
 class SimpleABTestingTemplate(Template):
-    def __init__(self, name, min_submitted: Optional[int] = 1, guidelines: Optional[str] = None):
+    def __init__(self, name, min_submitted: Optional[int] = 1, guidelines: Optional[str] = ""):
         self.name = name        
         self.guidelines = guidelines
         self.fields_model = ABTestingFields

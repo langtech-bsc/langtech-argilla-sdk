@@ -15,7 +15,7 @@ class DatasetManager:
             settings (dict): The settings of the dataset.
         """
         
-        dataset_name = f"{sanitize_string(name)}_dataset"
+        dataset_name = f"{sanitize_string(name)}"
 
         existent_dataset = self._client.datasets(name=dataset_name, workspace=workspace.name)
 
