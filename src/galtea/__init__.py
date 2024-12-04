@@ -84,8 +84,6 @@ class ArgillaAnnotationTask:
             export_records (bool): Whether to export records when complete
         """
 
-        print(workspace_name)
-
         try:
             workspace_name = name if not workspace_name else workspace_name
 
