@@ -73,7 +73,7 @@ class UserManager:
                 if not sent:
                     self._delete_user(created_user[0])
                     print(f"Error sending email to username: {created_user[0].username}, please check your email configuration or ensure that the email is valid") 
-                    continue               
+                    continue                    
                 
             self._add_user_to_workspace(created_user[0].username, workspace)
 
