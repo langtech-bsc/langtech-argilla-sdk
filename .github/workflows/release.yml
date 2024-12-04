@@ -1,6 +1,7 @@
 name: Upload Galtea-SDK to PyPI when a Release is Created
 
 on:
+  workflow_dispach:
   release:
     types: [created]
 
