@@ -12,7 +12,7 @@ class UserEmailNotifier:
     def __init__(self):
         self.smtp_server = os.getenv("SMTP_SERVER")
         self.smtp_user = os.getenv("SMTP_USER")
-        self.smtp_port = int(os.getenv("SMTP_PORT", default=465))
+        self.smtp_port = int(os.getenv("SMTP_PORT") or 465)
         self.smtp_password = os.getenv("SMTP_PASSWORD")
         self.sender_email = os.getenv("SMTP_SENDER_EMAIL")
 
