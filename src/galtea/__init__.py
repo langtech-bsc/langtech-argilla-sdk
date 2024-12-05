@@ -68,7 +68,7 @@ class ArgillaAnnotationTask:
         users_path_file: Optional[str] = "users.json",
         show_progress: bool = True,
         export_records: bool = True
-    ):
+    ) -> bool:
         """
         Create an annotation task with the specified parameters.
         
@@ -126,16 +126,20 @@ class ArgillaAnnotationTask:
                 export_path = f"{self._dataset_manager.dataset.name}_{strftime('%Y-%m-%d_%H-%M-%S')}.json"
                 self._dataset_manager.dataset.records.to_json(export_path)
                 print(f"Exported dataset to {export_path}")
+            
+            return True
+        
         except ValidationError as validation_error:
             print(validation_error)
             errors = convert_errors(validation_error, CUSTOM_MESSAGES)
             for error in errors:
                 print(f"[ERROR]: {error['msg']}")
+            return False
         except Exception as e:
             print(f"Error creating annotation task: {e}")
             import traceback
             traceback.print_exc()
-
+            return False
     
     def get_progress(self, dataset_name: str, workspace_name: str):
         """
