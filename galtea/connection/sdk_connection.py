@@ -1,5 +1,7 @@
 import os
 
+import argilla as rg
+
 class SDKConnection:
     
     client = None
@@ -18,8 +20,6 @@ class SDKConnection:
             raise ValueError("ARGILLA_API_URL is not set in the environment variables")
         if not api_key:
             raise ValueError("ARGILLA_API_KEY is not set in the environment variables")
-
-        import argilla as rg
         
         self.client = rg.Argilla(
             api_url=api_url,
