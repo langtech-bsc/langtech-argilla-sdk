@@ -1,7 +1,7 @@
 from string import Template
 
-
-HTML_EMAIL_TEMPLATE = Template("""
+HTML_EMAIL_TEMPLATE = Template(
+    """
 
         <!DOCTYPE html>
 <html lang="en">
@@ -67,4 +67,5 @@ HTML_EMAIL_TEMPLATE = Template("""
         </tr>
     </table>
 </body>
-</html>""")
+</html>"""
+)
