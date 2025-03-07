@@ -1,6 +1,15 @@
+import logging
+
 import argilla as rg
 
+from galtea.templates.template import Template
 from galtea.utils import load_json, sanitize_string
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[logging.FileHandler("argilla_operations.log"), logging.StreamHandler()],
+)
 
 
 class DatasetManager:
@@ -19,11 +28,11 @@ class DatasetManager:
 
         dataset_name = f"{sanitize_string(name)}"
 
-        existent_dataset = self._client.datasets(
+        existing_dataset = self._client.datasets(
             name=dataset_name, workspace=workspace.name
         )
 
-        if existent_dataset is None:
+        if not existing_dataset:
 
             dataset = rg.Dataset(
                 name=dataset_name,
@@ -32,19 +41,19 @@ class DatasetManager:
                 client=self._client,
             ).create()
 
-            print(f"Dataset {dataset_name} created.")
+            logging.info(f"Dataset {dataset_name} created.")
 
             self.dataset = dataset
         else:
-            print(
+            logging.error(
                 f"Dataset {dataset_name} already exists in workspace {workspace.name}"
             )
-            self.dataset = existent_dataset
+            self.dataset = existing_dataset
 
-    def load_records(self, template: str, dataset_path: str):
+    def upload_records(self, template: Template, dataset_path: str):
         """Load the records of the dataset from a JSON file.
         Parameters:
-            template (str): The template to use to validate the records.
+            template (Template): The template to use to validate the records.
             dataset_path (str): The path to the JSON file containing the records.
         """
         data = load_json(dataset_path)

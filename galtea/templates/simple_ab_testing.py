@@ -8,10 +8,18 @@ from galtea.templates.template import Template
 
 class SimpleABTestingTemplate(Template):
     def __init__(
-        self, name, min_submitted: Optional[int] = 1, guidelines: Optional[str] = ""
+        self, min_submitted: Optional[int] = 1, guidelines: Optional[str] = ""
     ):
-        self.name = name
-        self.guidelines = guidelines
+        self.guidelines = (
+            guidelines
+            if guidelines
+            else """
+            1. **Consistency:** Label each example consistently according to the defined criteria, ensuring no bias towards either variant.
+            2. **Clarity:** Focus on the specific elements being tested (e.g., text, design) and how they impact the user's experience.
+            3. **Detail:** Provide brief but clear justifications for your choice if required, highlighting key differences.
+            4. **Neutrality:** Avoid letting personal preferences influence your annotation; stick to the test's objective.
+        """
+        )
         self.fields_model = ABTestingFields
         self.min_submitted = min_submitted
 
@@ -20,12 +28,7 @@ class SimpleABTestingTemplate(Template):
         settings = rg.Settings(
             distribution=rg.TaskDistribution(min_submitted=self.min_submitted),
             allow_extra_metadata=True,
-            guidelines="""
-            1. **Consistency:** Label each example consistently according to the defined criteria, ensuring no bias towards either variant.
-            2. **Clarity:** Focus on the specific elements being tested (e.g., text, design) and how they impact the user's experience.
-            3. **Detail:** Provide brief but clear justifications for your choice if required, highlighting key differences.
-            4. **Neutrality:** Avoid letting personal preferences influence your annotation; stick to the test's objective.
-            """,
+            guidelines=self.guidelines,
             fields=[
                 rg.TextField(
                     name="prompt",
