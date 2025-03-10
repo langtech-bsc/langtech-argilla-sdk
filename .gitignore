@@ -7,3 +7,4 @@ build/
 .venv/
 *.egg-info
 *.log
+user_credentials.json
