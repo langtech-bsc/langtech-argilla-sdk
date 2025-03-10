@@ -1,5 +1,6 @@
 import logging
 from argparse import ArgumentParser
+from pathlib import Path
 
 from galtea.connection.sdk_connection import SDKConnection
 from galtea.users.user_manager import UserManager
@@ -27,7 +28,7 @@ def main():
         help="Name of the workspace you want to create",
     )
     args = parser.parse_args()
-    users_file = args.users_file
+    users_file = Path(args.users_file)
     workspace_name = args.workspace_name
 
     connection = SDKConnection()
@@ -36,12 +37,11 @@ def main():
     workspace_manager = WorkspaceManager(client)
     if not workspace_manager.workspace_exists(workspace_name):
         workspace_manager.create_workspace(workspace_name)
-    
+
     workspace = client.workspaces(workspace_name)
 
     user_manager = UserManager(client)
     user_manager.create_users(workspace, users_file)
-
 
 
 if __name__ == "__main__":

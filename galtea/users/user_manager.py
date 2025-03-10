@@ -1,10 +1,19 @@
+import json
+import logging
+from pathlib import Path
+
 import argilla as rg
 
 from galtea.models.user import UserInput
 from galtea.users.user_mail_notifier import UserEmailNotifier
 from galtea.utils import generate_random_string, load_json, sanitize_string
-from pathlib import Path
-import json
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[logging.FileHandler("argilla_operations.log"), logging.StreamHandler()],
+)
+
 
 class UserManager:
     def __init__(self, client: rg.Argilla):
@@ -47,7 +56,7 @@ class UserManager:
 
     def _delete_user(self, user: rg.User):
 
-        print(f"Deleting user: {user.username}")
+        logging.info(f"Deleting user: {user.username}")
 
         _user = self._client.users(user.username)
 
@@ -60,7 +69,7 @@ class UserManager:
     #     users = load_json(users_path_file)
 
     #     for user in users:
-            # validated_input_user = UserInput.model_validate(user)
+    # validated_input_user = UserInput.model_validate(user)
     #         username = self.parse_username_from_email(validated_input_user.email)
     #         new_user_credentials = self.generate_user_credentials(
     #             username, workspace, validated_input_user
@@ -69,7 +78,7 @@ class UserManager:
     #         created_user = self._create_user(new_user_credentials)
 
     #         if not created_user[2]:
-                # sent = self.user_mail_notifier.send_user_credentials(created_user[1])
+    # sent = self.user_mail_notifier.send_user_credentials(created_user[1])
 
     #             if not sent:
     #                 self._delete_user(created_user[0])
@@ -81,22 +90,23 @@ class UserManager:
     #         self._add_user_to_workspace(created_user[0].username, workspace)
 
     def create_users(self, workspace: rg.Workspace, users_path_file: Path) -> None:
-        with open(users_path_file, "r") as f:
-            users = json.load(f)
+        users = load_json(str(users_path_file))
 
         users_credentials = []
         for user in users:
             validated_input_user = UserInput.model_validate(user)
             username = self.parse_username_from_email(validated_input_user.email)
-            credentials = self.generate_user_credentials(username, workspace, validated_input_user)
+            credentials = self.generate_user_credentials(
+                username, workspace, validated_input_user
+            )
             _user = self._create_user(credentials)
-            self._add_user_to_workspace(_user.username, workspace)
+            self.add_user_to_workspace(_user.username, workspace)
             users_credentials.append(credentials)
-        
+
         with open("user_credentials.json", "w") as f:
             json.dump(users_credentials, f, indent=4)
 
-    def _add_user_to_workspace(self, username: str, workspace: rg.Workspace):
+    def add_user_to_workspace(self, username: str, workspace: rg.Workspace):
 
         user = self._client.users(username)
 
@@ -104,14 +114,14 @@ class UserManager:
             raise ValueError(f"User {username} does not exist")
 
         if user in workspace.users:
-            print(f"User {username} is already in workspace {workspace.name}")
-            return
+            raise ValueError(
+                f"User {username} is already in workspace {workspace.name}"
+            )
 
         try:
             user.add_to_workspace(workspace)
-            print(f"User {username} added to workspace {workspace.name}")
-            return
-
+            logging.info(f"User {username} added to workspace {workspace.name}")
         except Exception as e:
-            print(f"Error adding user {username} to workspace {workspace.name}: {e}")
-            return
+            raise RuntimeError(
+                f"Error adding user {username} to workspace {workspace.name}: {e}"
+            )
