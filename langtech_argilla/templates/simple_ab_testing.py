@@ -2,8 +2,8 @@ from typing import Optional
 
 import argilla as rg
 
-from galtea.models.template_fields import ABTestingFields
-from galtea.templates.template import Template
+from langtech_argilla.models.template_fields import ABTestingFields
+from langtech_argilla.templates.template import Template
 
 
 class SimpleABTestingTemplate(Template):

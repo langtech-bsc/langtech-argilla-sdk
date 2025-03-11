@@ -8,8 +8,8 @@ from email.mime.text import MIMEText
 
 import argilla as rg
 
-from galtea.users.html_email_template import HTML_EMAIL_TEMPLATE
-from galtea.utils import sanitize_string
+from langtech_argilla.users.html_email_template import HTML_EMAIL_TEMPLATE
+from langtech_argilla.utils import sanitize_string
 
 
 class UserEmailNotifier:

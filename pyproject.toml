@@ -4,7 +4,7 @@ version = "0.1.4"
 description = ""
 authors = ["Nicola Massarenti", "Andrei Petrea"]
 readme = "README.md"
-packages = [{include = "galtea"}]
+packages = [{include = "langtech_argilla"}]
 
 [tool.poetry.dependencies]
 python = "<3.13,>=3.9"

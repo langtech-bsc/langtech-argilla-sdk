@@ -1,9 +1,9 @@
 import logging
 from argparse import ArgumentParser
 
-from galtea.connection.sdk_connection import SDKConnection
-from galtea.users.user_manager import UserManager
-from galtea.workspaces.workspace_manager import WorkspaceManager
+from langtech_argilla.connection.sdk_connection import SDKConnection
+from langtech_argilla.users.user_manager import UserManager
+from langtech_argilla.workspaces.workspace_manager import WorkspaceManager
 
 logging.basicConfig(
     level=logging.INFO,

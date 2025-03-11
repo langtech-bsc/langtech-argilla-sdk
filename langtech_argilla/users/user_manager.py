@@ -4,9 +4,10 @@ from pathlib import Path
 
 import argilla as rg
 
-from galtea.models.user import UserInput
-from galtea.users.user_mail_notifier import UserEmailNotifier
-from galtea.utils import generate_random_string, load_json, sanitize_string
+from langtech_argilla.models.user import UserInput
+from langtech_argilla.users.user_mail_notifier import UserEmailNotifier
+from langtech_argilla.utils import (generate_random_string, load_json,
+                                    sanitize_string)
 
 logging.basicConfig(
     level=logging.INFO,

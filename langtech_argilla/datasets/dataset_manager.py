@@ -2,8 +2,8 @@ import logging
 
 import argilla as rg
 
-from galtea.templates.template import Template
-from galtea.utils import load_json, sanitize_string
+from langtech_argilla.templates.template import Template
+from langtech_argilla.utils import load_json, sanitize_string
 
 logging.basicConfig(
     level=logging.INFO,

@@ -1,8 +1,9 @@
 from typing import Optional
 
-from galtea.models.template_fields import TemplateType
-from galtea.templates.creator import TemplateFactory
-from galtea.templates.simple_ab_testing import SimpleABTestingTemplate
+from langtech_argilla.models.template_fields import TemplateType
+from langtech_argilla.templates.creator import TemplateFactory
+from langtech_argilla.templates.simple_ab_testing import \
+    SimpleABTestingTemplate
 
 
 class ConcreteTemplateFactory(TemplateFactory):

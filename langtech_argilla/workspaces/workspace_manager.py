@@ -1,7 +1,7 @@
 import argilla as rg
 
-from galtea.datasets.dataset_manager import DatasetManager
-from galtea.utils import sanitize_string
+from langtech_argilla.datasets.dataset_manager import DatasetManager
+from langtech_argilla.utils import sanitize_string
 
 
 class WorkspaceManager:

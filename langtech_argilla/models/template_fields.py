@@ -1,6 +1,6 @@
 from enum import Enum
 
-from galtea.models.base_fields import BaseTemplateFields
+from langtech_argilla.models.base_fields import BaseTemplateFields
 
 
 class ABTestingFields(BaseTemplateFields):
