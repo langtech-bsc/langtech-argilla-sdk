@@ -15,22 +15,22 @@ logging.basicConfig(
 def main():
     parser = ArgumentParser()
     parser.add_argument(
-        "--users",
+        "--usernames",
         type=str,
         required=True,
-        help="A list of users to add (name1,name2,name3...)",
+        help="A list of usernames to add (name1,name2,name3...)",
     )
     parser.add_argument(
         "--workspace-name",
         type=str,
         required=True,
-        help="Name of the workspace you want to create",
+        help="Name of the workspace you want to add users to",
     )
     args = parser.parse_args()
-    users_str = args.users
+    usernames = args.usernames
     workspace_name = args.workspace_name
 
-    users = users_str.split(",")
+    users = usernames.strip().split(",")
 
     connection = SDKConnection()
     client = connection.get_client()
