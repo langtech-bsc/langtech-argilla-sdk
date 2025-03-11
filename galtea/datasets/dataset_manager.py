@@ -83,15 +83,24 @@ class DatasetManager:
 
         self.dataset.records.log(records=records)
 
-    def export_records(self, output_path: str):
+    def export_records(self, dataset_name: str, workspace_name: str, output_path: str):
         """Export the records of the dataset to a JSON file."""
+        self._get_dataset(dataset_name, workspace_name)
         self.dataset.records.to_json(output_path)
 
-    def get_progress(self):
+    def get_progress(self, dataset_name: str, workspace_name: str):
         """Get the progress of the dataset."""
-        if self.dataset is None:
-            raise ValueError(f"Dataset not found")
+        self._get_dataset(dataset_name, workspace_name)
+
         return self.dataset.progress()
+
+    def _get_dataset(self, dataset_name: str, workspace_name: str) -> rg.Dataset:
+        if not self.dataset or type(self.dataset) == str:
+            self.dataset = self._client.datasets(dataset_name, workspace_name)
+            if not self.dataset:
+                raise ValueError(
+                    f"Dataset {dataset_name} not found in workspace {workspace_name}"
+                )
 
     @classmethod
     def get_dataset_manager(
