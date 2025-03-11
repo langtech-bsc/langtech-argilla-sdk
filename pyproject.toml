@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "galtea-sdk"
+name = "langtech-argilla-sdk"
 version = "0.1.4"
 description = ""
 authors = ["Nicola Massarenti", "Andrei Petrea"]
